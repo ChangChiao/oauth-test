@@ -24,7 +24,7 @@ function App() {
     console.log(response);
   };
 
-  console.log("import.meta.env.VITE_GOOGLE_ID", import.meta.env.VITE_GOOGLE_ID);
+  // console.log("import.meta.env.VITE_GOOGLE_ID", import.meta.env.VITE_GOOGLE_ID);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -38,7 +38,7 @@ function App() {
           clientId={import.meta.env.VITE_GOOGLE_ID}
           buttonText="Login"
           onSuccess={responseGoogle}
-          onFailure={errorGoogle}
+          onFailure={responseGoogle}
           cookiePolicy={"single_host_origin"}
         />
       </div>
