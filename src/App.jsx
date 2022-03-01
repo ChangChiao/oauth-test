@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { TextField } from "../components";
+import { GoogleLogin } from "react-google-login";
 import clsx from "clsx";
 function App() {
   const [{ account, password }, setForm] = useState({
@@ -15,6 +16,16 @@ function App() {
     });
   };
 
+  const errorGoogle = (response) => {
+    console.log(response);
+  };
+
+  const responseGoogle = (response) => {
+    console.log(response);
+  };
+
+  console.log("import.meta.env.VITE_GOOGLE_ID", import.meta.env.VITE_GOOGLE_ID);
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log("account, password", account, password);
@@ -22,6 +33,15 @@ function App() {
 
   return (
     <div className="text-cente bg-slate-200">
+      <div className="mx-auto w-20">
+        <GoogleLogin
+          clientId={import.meta.env.VITE_GOOGLE_ID}
+          buttonText="Login"
+          onSuccess={responseGoogle}
+          onFailure={errorGoogle}
+          cookiePolicy={"single_host_origin"}
+        />
+      </div>
       <form
         className="items mx-auto flex w-96 flex-1 flex-col gap-2 p-10"
         onChangeCapture={(event) => onChange(event.currentTarget)}
