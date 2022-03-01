@@ -7,6 +7,7 @@ function App() {
     account: "",
     password: "",
   });
+  const [userInfo, setUserinfo] = useState({});
 
   const onChange = (target) => {
     const form = Object.fromEntries(new FormData(target).entries());
@@ -21,6 +22,8 @@ function App() {
   };
 
   const responseGoogle = (response) => {
+    const { Ju } = response;
+    Ju?.zv && setUserinfo({ email: Ju.zv });
     console.log(response);
   };
 
@@ -38,7 +41,7 @@ function App() {
           clientId={import.meta.env.VITE_GOOGLE_ID}
           buttonText="Login"
           onSuccess={responseGoogle}
-          onFailure={responseGoogle}
+          onFailure={errorGoogle}
           cookiePolicy={"single_host_origin"}
         />
       </div>
@@ -53,6 +56,11 @@ function App() {
           login
         </button>
       </form>
+      {userInfo.email && (
+        <h1 className="p-2 text-center text-xl font-bold">
+          Hello ~ {userInfo.email}
+        </h1>
+      )}
     </div>
   );
 }
